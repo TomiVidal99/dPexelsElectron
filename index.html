@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>dPexels</title>
+    <link rel="stylesheet" type="text/css" href="mainCss.css">
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
+  </head>
+  <body>
+    <div id="inputs_wrapper">
+      <div>
+        <h1 style="text-align: center; color: #462445;
+        font-size: 50pt">dPexels!</h1>
+        <h2 style="text-align: center; color: #fbbe53; font-variant: small-caps;">Download all da images from pexels!!!</h2>
+        <div class="input-div">
+            <input id="user_key" type="text" placeholder="Insert your user key">
+            <div id="user_key_comment" class="input_comment"></div>
+          </div>
+          <div class="input-div">
+            <input id="user_keyword" type="text" placeholder="Insert your searching keyword">
+            <div id="user_keyword_comment" class="input_comment"></div>
+          </div>
+          <div class="input-div">
+            <input id="images_amount" type="range" style="background: transparent;">
+            <div id="images_amount_result" min="0" max="100" step="1" value="1" style="text-align: center; font-size: 30pt; color: white">0 photos selected</div>
+          </div>
+          <div id="input_buttons">
+            <button id="button_set">SET CONFIGURATION</button>
+            <button id="button_start_stop" disabled="true">START DOWNLOADING</button>
+          </div>
+        </div>  
+      </div>
+      <div id="creatorStamp">by: Tomás Vidal</div>
+    <script type="text/javascript" src="handleApi.js"></script>
+    <script type="text/javascript" src="handleDownload.js"></script>
+    <script type="text/javascript" src="handleInputs.js"></script>
+    <script type="text/javascript">
+      const user_key = document.getElementById("user_key")
+      const user_key_comment = document.getElementById("user_key_comment")
+      const user_keyword = document.getElementById("user_keyword")
+      const user_keyword_comment = document.getElementById("user_keyword_comment")
+      const images_amount = document.getElementById("images_amount")
+      const button_set = document.getElementById("button_set")
+      const button_start_stop = document.getElementById("button_start_stop")
+
+      const images_amount_result = document.getElementById("images_amount_result")
+
+      user_key.addEventListener("blur", handleUserKeyBlur)
+      user_key.addEventListener("click", handleUserKeyClick)
+      user_keyword.addEventListener("blur", handleUserKeywordBlur)
+      user_keyword.addEventListener("click", handleUserKeywordClick)
+      images_amount.addEventListener("input", handleImagesAmountInput)
+      images_amount.addEventListener("blur", handleImagesAmountBlur)
+      button_set.addEventListener("click", handleButtonSetClick)
+      button_start_stop.addEventListener("click", handleButtonStartStopClick)
+
+      window.onload = () => {
+        // set the range input to 0
+        images_amount.value = 0;
+      }
+    </script>
+  </body>
+</html>
