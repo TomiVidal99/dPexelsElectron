@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="inputs_wrapper">
-      <div>
+      <div style="width: 100%; top: 0px; height: 100%;">
         <h1 style="text-align: center; color: #462445;
         font-size: 50pt">dPexels!</h1>
         <h2 style="text-align: center; color: #fbbe53; font-variant: small-caps;">Download all da images from pexels!!!</h2>
@@ -22,12 +22,12 @@
             <div id="user_keyword_comment" class="input_comment"></div>
           </div>
           <div class="input-div">
-            <input id="images_amount" type="range" style="background: transparent;">
-            <div id="images_amount_result" min="0" max="100" step="1" value="1" style="text-align: center; font-size: 30pt; color: white">0 photos selected</div>
+            <input id="images_amount" type="range" disabled="true" style="background: transparent;">
+            <div id="images_amount_result" step="1" style="text-align: center; font-size: 30pt; color: white; width: 100%">0 photos selected of 0</div>
           </div>
           <div id="input_buttons">
-            <button id="button_set">SET CONFIGURATION</button>
-            <button id="button_start_stop" disabled="true">START DOWNLOADING</button>
+            <button id="button_set" class="input_buttons_item">SET CONFIGURATION</button>
+            <button id="button_start_stop" class="input_buttons_item" disabled="true">START DOWNLOADING</button>
           </div>
         </div>  
       </div>
@@ -58,6 +58,7 @@
       window.onload = () => {
         // set the range input to 0
         images_amount.value = 0;
+        images_amount.max = 0;
       }
     </script>
   </body>
