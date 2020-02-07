@@ -29,6 +29,7 @@ function retrieve_images(key, keyword) {
                     photos_urls.push(obj);
                 });
                 pages = Math.ceil(result.total_results / 80);
+                updateProgressBar(pages, current_page);
                 if (pages > 1 && result.page != pages) {
                     console.log("current: ", result.page, "of: ", pages)
                     get_page(current_page + 1);

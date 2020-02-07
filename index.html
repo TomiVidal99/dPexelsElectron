@@ -9,56 +9,102 @@
   </head>
   <body>
     <div id="inputs_wrapper">
-      <div style="width: 100%; top: 0px; height: 100%;">
-        <h1 style="text-align: center; color: #462445;
-        font-size: 50pt">dPexels!</h1>
-        <h2 style="text-align: center; color: #fbbe53; font-variant: small-caps;">Download all da images from pexels!!!</h2>
-        <div class="input-div">
-            <input id="user_key" type="text" placeholder="Insert your user key">
-            <div id="user_key_comment" class="input_comment"></div>
+      <h1 id="title" style="text-align: center; color: #462445;
+      font-size: 50pt">dPexels!</h1>
+      <h2 id="subtitle" style="text-align: center; color: #fbbe53; font-variant: small-caps;">Download all da images from pexels!!!</h2>
+      <div class="input-div" id="first_input">
+          <input id="user_key" type="text" placeholder="Insert your user key">
+          <div id="user_key_warning" class="warning">
+            <button id="user_key_warning_button" class="warning_button">x</button>
+            <div id="user_key_warning_comment" class="warning_comment">
+              <div>You can get the user key at </div>
+              <div id="user_key_link" style="color: blue">https://www.pexels.com/api/new/</div>
+            </div>
           </div>
-          <div class="input-div">
-            <input id="user_keyword" type="text" placeholder="Insert your searching keyword">
-            <div id="user_keyword_comment" class="input_comment"></div>
-          </div>
-          <div class="input-div">
-            <input id="images_amount" type="range" disabled="true" style="background: transparent;">
-            <div id="images_amount_result" step="1" style="text-align: center; font-size: 30pt; color: white; width: 100%">0 photos selected of 0</div>
-          </div>
-          <div id="input_buttons">
-            <button id="button_set" class="input_buttons_item">SET CONFIGURATION</button>
-            <button id="button_start_stop" class="input_buttons_item" disabled="true">START DOWNLOADING</button>
-          </div>
-        </div>  
       </div>
-      <div id="creatorStamp">by: Tomás Vidal</div>
+      <div class="input-div" id="second_input">
+        <input id="user_keyword" type="text" placeholder="Insert your searching keyword">
+      </div>
+      <select id="res_selection">
+        <option selected disabled>Select resolution (from mayor to lower)</option>
+        <option>large2x</option>
+        <option>large</option>
+        <option>portrait</option>
+        <option>original</option>
+        <option>medium</option>
+        <option>small</option>
+        <option>tiny</option>
+      </select>  
+      <div id="third_input">
+          <div id="user_downloading_path">Select downloading folder</div>
+      </div>
+      <div id="fourth_input">
+        <input id="images_amount" type="range" disabled=true style="background: transparent;">
+      </div>
+      <div id="fifth_input">
+        <div id="images_amount_result" step="1" style="text-align: center; font-size: 25pt; color: white; width: 100%">Press set when ready!</div>  
+      </div>
+      <div id="progress">
+        <div id="progress_bar"></div>
+      </div>
+      <div id="input_buttons">
+        <button id="button_set" class="input_buttons_item">SET CONFIGURATION</button>
+        <button id="button_start_stop" class="input_buttons_item" disabled=true>START DOWNLOADING</button>
+      </div>
+    </div>
+    <div id="creatorStamp">by: Tomás Vidal</div>
     <script type="text/javascript" src="handleApi.js"></script>
     <script type="text/javascript" src="handleDownload.js"></script>
     <script type="text/javascript" src="handleInputs.js"></script>
     <script type="text/javascript">
+      // user key input
       const user_key = document.getElementById("user_key")
       const user_key_comment = document.getElementById("user_key_comment")
-      const user_keyword = document.getElementById("user_keyword")
-      const user_keyword_comment = document.getElementById("user_keyword_comment")
-      const images_amount = document.getElementById("images_amount")
-      const button_set = document.getElementById("button_set")
-      const button_start_stop = document.getElementById("button_start_stop")
-
-      const images_amount_result = document.getElementById("images_amount_result")
-
       user_key.addEventListener("blur", handleUserKeyBlur)
       user_key.addEventListener("click", handleUserKeyClick)
+      // user keyword input
+      const user_keyword = document.getElementById("user_keyword")
+      const user_keyword_comment = document.getElementById("user_keyword_comment")
       user_keyword.addEventListener("blur", handleUserKeywordBlur)
       user_keyword.addEventListener("click", handleUserKeywordClick)
+      // user path selection input
+      const user_downloading_path = document.getElementById("user_downloading_path")
+      const user_downloading_path_comment = document.getElementById("user_downloading_path_comment")
+      user_downloading_path.addEventListener("click", handleUserDownloadingPathClick)
+      // user selection for amount of images
+      const images_amount = document.getElementById("images_amount")
+      const images_amount_result = document.getElementById("images_amount_result")
       images_amount.addEventListener("input", handleImagesAmountInput)
       images_amount.addEventListener("blur", handleImagesAmountBlur)
+      // set y start/stop button
+      const button_set = document.getElementById("button_set")
+      const button_start_stop = document.getElementById("button_start_stop")
       button_set.addEventListener("click", handleButtonSetClick)
       button_start_stop.addEventListener("click", handleButtonStartStopClick)
+      // progress bar
+      const progress = document.getElementById("progress");
+      const progress_bar = document.getElementById("progress_bar");
+   
 
+      // warnings
+      const user_key_warning = document.getElementById("user_key_warning");
+      const user_key_warning_button = document.getElementById("user_key_warning_button");
+      user_key_warning_button.addEventListener("click", keyWarningButtonClick);
+
+      // user api key link
+      document.getElementById("user_key_link").addEventListener("click", userKeyLinkClick)
+
+      // select 
+      const res_selection = document.getElementById("res_selection");
+      res_selection.addEventListener("change", resolutionSelectionChange);
+
+      // after the pages loads
       window.onload = () => {
         // set the range input to 0
         images_amount.value = 0;
         images_amount.max = 0;
+        // no display progress_bar at beggining
+        progress_bar.style.display = "none";
       }
     </script>
   </body>
