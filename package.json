@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/TomiVidal99/dPexelsElectron#readme",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "electron-json-storage": "^4.1.8",
     "pexels-api-wrapper": "^1.1.1",
     "request": "^2.88.0"
